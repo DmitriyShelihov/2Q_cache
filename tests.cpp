@@ -17,7 +17,7 @@ FILE* tests_src = fopen("tests.txt", "r");
 
 class Q2cacheTest: public ::testing::Test {
 	public: 
-		size_t fifo_sz_exp;
+		size_t fifo_sz_exp;						//Fifo size that we expect
 		size_t fifo_sz_cur;
 		char* fifo_bf_test;
 		char* fifo_bf;
@@ -67,11 +67,12 @@ class Q2cacheTest: public ::testing::Test {
 			fifo_bf = (char*)calloc(fifo_sz*2*sizeof(int), sizeof(char));
 			save_fifo_bf = fifo_bf;
 			fgets(fifo_bf, fifo_sz*2*sizeof(int), tests_src);
+			
+			printf("Fifo bf: %s\n", fifo_bf);
 
 			fifo_sz_exp = 0;														//fifo sz after inserting pages we expect
 			sscanf(fifo_bf, "%ld", &fifo_sz_exp);
 			next_object(&fifo_bf, 1);
-
 
 			fifo_bf_test = (char*)calloc(fifo_sz*2*sizeof(int), sizeof(char));		//fifo after inserting pages
 			save_fifo_bf_test = fifo_bf_test;
