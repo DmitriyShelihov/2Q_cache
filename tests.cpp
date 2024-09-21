@@ -21,7 +21,8 @@ class Q2cacheTest: public ::testing::Test {
 		size_t fifo_sz_cur;
 		char* fifo_bf_test;
 		char* fifo_bf;
-		
+
+
 		size_t lru_sz_exp;
 		size_t lru_sz_cur;
 		char* lru_bf_test;
