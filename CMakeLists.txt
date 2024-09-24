@@ -25,6 +25,11 @@ add_executable(
   src/main.cpp
 )
 
+add_executable(
+  TEST_GEN
+  src/test_gen.cpp
+)
+
 target_include_directories(TESTS PUBLIC include/)
 target_include_directories(MAIN PUBLIC include/)
 
@@ -32,7 +37,6 @@ target_link_libraries(
   TESTS
   GTest::gtest_main 
 )
-
 
 include(GoogleTest)
 gtest_discover_tests(TESTS)

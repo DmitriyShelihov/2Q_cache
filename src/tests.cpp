@@ -3,7 +3,7 @@
 #include "ideal_cache.h"
 
 
-#define SIZE_OF_INPUT_DATA 1000	//[bytes] The max size in bytes of all input pages
+#define SIZE_OF_INPUT_DATA 100000000	//[bytes] The max size in bytes of all input pages
 
 void next_object(char** buf, int times) {
 	for (int i = 0; i < times; i++) {
@@ -34,32 +34,57 @@ class Q2cacheTest: public ::testing::Test {
 		char* save_lru_bf;
 	
 	protected: 
+		std::unordered_map <int,std::list <int>> predict_pages(char* buf, int npages) {
+			std::unordered_map <int, std::list <int>> Ideal_map;            
+            int page = 0;
+
+            for (int i = 0; i < npages; i++) {
+            	int sscanf_res = sscanf(buf, "%d", &page);
+                if (Ideal_map.find(page) != Ideal_map.end()) {
+                	if ((Ideal_map[page]).front() != -1)
+                    	(Ideal_map[page]).push_back(i);
+                   	else {
+                   		(Ideal_map[page]).pop_front();
+                        (Ideal_map[page]).push_back(i);
+                    }
+                } else 
+               		(Ideal_map[page]).push_front(-1);
+                next_object(&buf, 1);
+         	}
+			return Ideal_map;
+		}
+
 		void SetUp() {
 			size_t fifo_sz = 0;
 			size_t lru_sz = 0;
 			int npages = 0;
 			char* buf = (char*)calloc(SIZE_OF_INPUT_DATA, sizeof(char));
 			char* save_buf = buf;
-			fgets(buf, SIZE_OF_INPUT_DATA, tests_src);
+			buf = fgets(buf, SIZE_OF_INPUT_DATA, tests_src);
 			int sscanf_res = sscanf(buf, "%ld %ld %d", &fifo_sz, &lru_sz, &npages);
 			Q2_cache cache (fifo_sz, lru_sz);
-			
 			next_object(&buf, 3);
 
 			int page = 0;
 			int ticks = 0;
 			int perfect_ticks = 0;
-
+			
 			Ideal_cache id_cache (fifo_sz + lru_sz);
 			
+			std::unordered_map<int, std::list <int>> Ideal_map = predict_pages(buf, npages);		//map with page positions for ideal_cache
+
 			for (int i = 0; i < npages; i++) {
 				int sscanf_res = sscanf(buf, "%d", &page);
 				int insert_result = (int) cache.insert_page(page);
 				if (insert_result == 2 || insert_result == 3) 
 					ticks++;
-							
+				perfect_ticks += id_cache.insert_page(page, (Ideal_map[page]).front());
+				if ((Ideal_map[page]).size() > 0)
+					(Ideal_map[page]).pop_front();
 				next_object(&buf, 1);
 			}
+			
+			std::cout << "Your ticks\\Ideal ticks: " << ticks << "\\" << perfect_ticks << std::endl;
 
 			free(save_buf);
 
@@ -68,35 +93,39 @@ class Q2cacheTest: public ::testing::Test {
 			int fifo_sz_get = 0;
 			int lru_sz_get = 0;
 
-			fscanf(cache_dump, "%d %d ", &fifo_sz_get, &lru_sz_get);
+			int scanf_res = fscanf(cache_dump, "%d %d ", &fifo_sz_get, &lru_sz_get);
 
 			fifo_bf = (char*)calloc(fifo_sz*2*sizeof(int), sizeof(char));
 			save_fifo_bf = fifo_bf;
-			fgets(fifo_bf, fifo_sz*2*sizeof(int), tests_src);
-		
+			fifo_bf = fgets(fifo_bf, fifo_sz*2*sizeof(int), tests_src);
 			sscanf(fifo_bf, "%ld", &fifo_sz_exp);
+			
 			next_object(&fifo_bf, 1);
-		
+			
 			fifo_bf_test = (char*)calloc(fifo_sz*2*sizeof(int), sizeof(char));		//fifo after inserting pages
 			save_fifo_bf_test = fifo_bf_test;
-			fgets(fifo_bf_test, fifo_sz*2*sizeof(int), cache_dump);
+			fifo_bf_test = fgets(fifo_bf_test, fifo_sz*2*sizeof(int), cache_dump);
 			sscanf(fifo_bf_test, "%ld", &fifo_sz_cur);
+			
 			next_object(&fifo_bf_test, 1);
 
 			lru_bf = (char*)calloc(lru_sz*2*sizeof(int), sizeof(char));
 			save_lru_bf = lru_bf;
-			fgets(lru_bf, lru_sz*2*sizeof(int), tests_src);
+			lru_bf = fgets(lru_bf, lru_sz*2*sizeof(int), tests_src);
 			sscanf(lru_bf, "%ld", &lru_sz_exp);
+			
 			next_object(&lru_bf, 1);
-
+			
 			lru_bf_test = (char*)calloc(lru_sz*2*sizeof(int), sizeof(char));		//lru after inserting pages
 			save_lru_bf_test = lru_bf_test;
-			fgets(lru_bf_test, lru_sz*2*sizeof(int), cache_dump);
-																
+			lru_bf_test = fgets(lru_bf_test, lru_sz*2*sizeof(int), cache_dump);							
 			sscanf(lru_bf_test, "%ld", &lru_sz_cur);
+			
 			next_object(&lru_bf_test, 1);
+
 			fclose(cache_dump);
 		}
+
 		void TearDown() {
 			free(save_fifo_bf);
 			free(save_fifo_bf_test);
@@ -113,25 +142,18 @@ class Q2cacheTest: public ::testing::Test {
 	ASSERT_STREQ(lru_bf_test, lru_bf);
 
 
-TEST_F(Q2cacheTest, test1) {
-	ASSERTION
-}
+TEST_F(Q2cacheTest, test1) {ASSERTION}
+TEST_F(Q2cacheTest, test2) {ASSERTION}
+TEST_F(Q2cacheTest, test3) {ASSERTION}
+TEST_F(Q2cacheTest, test4) {ASSERTION}
+TEST_F(Q2cacheTest, test5) {ASSERTION}
+TEST_F(Q2cacheTest, test6) {ASSERTION}
+TEST_F(Q2cacheTest, test7) {ASSERTION}
+TEST_F(Q2cacheTest, test8) {ASSERTION}
+TEST_F(Q2cacheTest, test9) {ASSERTION}
+TEST_F(Q2cacheTest, test10) {ASSERTION}
 
-TEST_F(Q2cacheTest, test2) {
-	ASSERTION
-}
 
-TEST_F(Q2cacheTest, test3) {
-	ASSERTION
-}
-
-TEST_F(Q2cacheTest, test4) {
-	ASSERTION
-}
-
-TEST_F(Q2cacheTest, test5) {
-	ASSERTION
-}
 
 int main(int argc, char** argv) {
 	::testing::InitGoogleTest(&argc, argv);

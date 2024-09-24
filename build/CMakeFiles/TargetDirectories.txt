@@ -1,5 +1,6 @@
 /home/dmitriy/Рабочий стол/Владос/2Q-cache/build/CMakeFiles/TESTS.dir
 /home/dmitriy/Рабочий стол/Владос/2Q-cache/build/CMakeFiles/MAIN.dir
+/home/dmitriy/Рабочий стол/Владос/2Q-cache/build/CMakeFiles/TEST_GEN.dir
 /home/dmitriy/Рабочий стол/Владос/2Q-cache/build/CMakeFiles/test.dir
 /home/dmitriy/Рабочий стол/Владос/2Q-cache/build/CMakeFiles/edit_cache.dir
 /home/dmitriy/Рабочий стол/Владос/2Q-cache/build/CMakeFiles/rebuild_cache.dir

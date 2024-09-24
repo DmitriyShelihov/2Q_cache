@@ -17,7 +17,7 @@ int main() {
 		if (input_res == 2 || input_res == 3)
 			ticks++;
 	}
-	std::cout << ticks;
+	std::cout << ticks << std::endl;
 
 	return 0;
 }

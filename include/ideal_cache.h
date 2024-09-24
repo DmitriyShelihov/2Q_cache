@@ -29,11 +29,7 @@ class Ideal_cache {
 				return tick;
 			}
 			else {															//insert page
-				if (id_list.size() < id_list_size) {
-					id_list.push_front(page_number);
-					id_umap[page_number] = {id_list.begin(), next_hit}; 
-				}
-				else {
+				if (id_list.size() >= id_list_size) {
 					int latest_page = page_number;
 					if (next_hit != -1)	{ 
 						int max = next_hit;
@@ -52,17 +48,16 @@ class Ideal_cache {
 						return miss;
 					id_list.erase((id_umap[latest_page]).iter);
 					id_umap.erase(latest_page);
-					id_list.push_front(page_number);
-					id_umap[page_number] = {id_list.begin(), next_hit};
 				}
+				id_list.push_front(page_number);
+				id_umap[page_number] = {id_list.begin(), next_hit};
 				return miss;
 			}
 		}
 		void coloured_dump() {
               std::cout << "\033[0;33m" << "IDEAL_CACHE:\n" << "\033[0;0m";
-              for (std::list <int>::iterator i = id_list.begin(); i != id_list.end(); ++i) {
+              for (std::list <int>::iterator i = id_list.begin(); i != id_list.end(); ++i) 
                   std::cout << "\033[0;34m" << "[" << "\033[0;0m" << *i << "\033[0;34m" << "]" << "\033[0;0m";
-              }
               std::cout << std::endl;
         };
 

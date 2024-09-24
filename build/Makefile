@@ -198,6 +198,19 @@ MAIN/fast:
 .PHONY : MAIN/fast
 
 #=============================================================================
+# Target rules for targets named TEST_GEN
+
+# Build rule for target.
+TEST_GEN: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 TEST_GEN
+.PHONY : TEST_GEN
+
+# fast build rule for target.
+TEST_GEN/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST_GEN.dir/build.make CMakeFiles/TEST_GEN.dir/build
+.PHONY : TEST_GEN/fast
+
+#=============================================================================
 # Target rules for targets named gmock
 
 # Build rule for target.
@@ -273,6 +286,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MAIN.dir/build.make CMakeFiles/MAIN.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/test_gen.o: src/test_gen.cpp.o
+.PHONY : src/test_gen.o
+
+# target to build an object file
+src/test_gen.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST_GEN.dir/build.make CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.o
+.PHONY : src/test_gen.cpp.o
+
+src/test_gen.i: src/test_gen.cpp.i
+.PHONY : src/test_gen.i
+
+# target to preprocess a source file
+src/test_gen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST_GEN.dir/build.make CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.i
+.PHONY : src/test_gen.cpp.i
+
+src/test_gen.s: src/test_gen.cpp.s
+.PHONY : src/test_gen.s
+
+# target to generate assembly for a file
+src/test_gen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TEST_GEN.dir/build.make CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.s
+.PHONY : src/test_gen.cpp.s
+
 src/tests.o: src/tests.cpp.o
 .PHONY : src/tests.o
 
@@ -312,6 +349,7 @@ help:
 	@echo "... test"
 	@echo "... MAIN"
 	@echo "... TESTS"
+	@echo "... TEST_GEN"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
@@ -319,6 +357,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/test_gen.o"
+	@echo "... src/test_gen.i"
+	@echo "... src/test_gen.s"
 	@echo "... src/tests.o"
 	@echo "... src/tests.i"
 	@echo "... src/tests.s"
