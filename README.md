@@ -25,6 +25,7 @@ Then:
 3) input requests 
 
 4) The algorithm will return the number of cache hits
+   
 * To generate tests(default 10): 
 ```
     ./TEST_GEN 10
