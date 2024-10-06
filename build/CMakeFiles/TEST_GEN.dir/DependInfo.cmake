@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/dmitriy/Рабочий стол/Владос/2Q-cache/src/test_gen.cpp" "CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.o" "gcc" "CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.o.d"
+  "/home/dmitriy/Рабочий стол/Владос/2Q_cache/src/test_gen.cpp" "CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.o" "gcc" "CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.o.d"
   )
 
 # Targets to which this target links.

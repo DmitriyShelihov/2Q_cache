@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/dmitriy/Рабочий стол/Владос/2Q-cache/include"
+CXX_INCLUDES = -I"/home/dmitriy/Рабочий стол/Владос/2Q_cache/include"
 
 CXX_FLAGS = -std=c++20 -O2 -g
 

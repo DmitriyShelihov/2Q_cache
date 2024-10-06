@@ -8,13 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/dmitriy/Рабочий стол/Владос/2Q-cache/src/tests.cpp" "CMakeFiles/TESTS.dir/src/tests.cpp.o" "gcc" "CMakeFiles/TESTS.dir/src/tests.cpp.o.d"
+  "/home/dmitriy/Рабочий стол/Владос/2Q_cache/src/tests.cpp" "CMakeFiles/TESTS.dir/src/tests.cpp.o" "gcc" "CMakeFiles/TESTS.dir/src/tests.cpp.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/dmitriy/Рабочий стол/Владос/2Q-cache/build/_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
-  "/home/dmitriy/Рабочий стол/Владос/2Q-cache/build/_deps/googletest-build/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "/home/dmitriy/Рабочий стол/Владос/2Q_cache/build/_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
+  "/home/dmitriy/Рабочий стол/Владос/2Q_cache/build/_deps/googletest-build/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

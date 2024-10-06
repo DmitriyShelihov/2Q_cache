@@ -1,7 +1,7 @@
 CMakeFiles/MAIN.dir/src/main.cpp.o: \
- /home/dmitriy/Рабочий\ стол/Владос/2Q-cache/src/main.cpp \
+ /home/dmitriy/Рабочий\ стол/Владос/2Q_cache/src/main.cpp \
  /usr/include/stdc-predef.h \
- /home/dmitriy/Рабочий\ стол/Владос/2Q-cache/include/2Q_cache.h \
+ /home/dmitriy/Рабочий\ стол/Владос/2Q_cache/include/2Q_cache.h \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

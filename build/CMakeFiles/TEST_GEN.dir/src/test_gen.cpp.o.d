@@ -1,5 +1,5 @@
 CMakeFiles/TEST_GEN.dir/src/test_gen.cpp.o: \
- /home/dmitriy/Рабочий\ стол/Владос/2Q-cache/src/test_gen.cpp \
+ /home/dmitriy/Рабочий\ стол/Владос/2Q_cache/src/test_gen.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

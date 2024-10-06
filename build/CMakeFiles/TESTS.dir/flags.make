@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/dmitriy/Рабочий стол/Владос/2Q-cache/include" -isystem "/home/dmitriy/Рабочий стол/Владос/2Q-cache/build/_deps/googletest-src/googletest/include" -isystem "/home/dmitriy/Рабочий стол/Владос/2Q-cache/build/_deps/googletest-src/googletest"
+CXX_INCLUDES = -I"/home/dmitriy/Рабочий стол/Владос/2Q_cache/include" -isystem "/home/dmitriy/Рабочий стол/Владос/2Q_cache/build/_deps/googletest-src/googletest/include" -isystem "/home/dmitriy/Рабочий стол/Владос/2Q_cache/build/_deps/googletest-src/googletest"
 
 CXX_FLAGS = -std=c++20 -O2 -g
 

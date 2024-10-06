@@ -1,5 +1,4 @@
-#ifndef _Q2_CACHE_
-#define _Q2_CACHE_
+#pragma once
 
 #include <iostream>
 #include <list>
@@ -23,8 +22,13 @@ class Q2_cache {
     	std::list <int> lru;
     
 	public:
-		Q2_cache (size_t fifo_sz, size_t lru_sz)
-			: fifo_size(fifo_sz), lru_size(lru_sz) {}
+		Q2_cache (size_t cache_sz) {
+			size_t fifo_sz = cache_sz/3;
+			size_t lru_sz = cache_sz-fifo_sz;
+			fifo_size = fifo_sz;
+			lru_size = lru_sz;
+		}
+			
 		Q2_algorythm_result insert_page(int page_number) {
 			int key = page_number;
 			if (fifo_umap.find(key) != fifo_umap.end()) {	//the page is currently in the fifo -> transport page to lru
@@ -90,13 +94,6 @@ class Q2_cache {
 		};
 
 };
-
-#endif  //_Q2_CACHE_
-
-
-
-
-
 
 
 

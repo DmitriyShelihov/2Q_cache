@@ -55,21 +55,22 @@ class Q2cacheTest: public ::testing::Test {
 		}
 
 		void SetUp() {
-			size_t fifo_sz = 0;
-			size_t lru_sz = 0;
+			size_t cache_sz = 0;
 			int npages = 0;
 			char* buf = (char*)calloc(SIZE_OF_INPUT_DATA, sizeof(char));
 			char* save_buf = buf;
 			buf = fgets(buf, SIZE_OF_INPUT_DATA, tests_src);
-			int sscanf_res = sscanf(buf, "%ld %ld %d", &fifo_sz, &lru_sz, &npages);
-			Q2_cache cache (fifo_sz, lru_sz);
+			int sscanf_res = sscanf(buf, "%ld %d", &cache_sz, &npages);
+			size_t fifo_sz = cache_sz/3;
+			size_t lru_sz = cache_sz - fifo_sz;
+			Q2_cache cache (cache_sz);
 			next_object(&buf, 3);
 
 			int page = 0;
 			int ticks = 0;
 			int perfect_ticks = 0;
 			
-			Ideal_cache id_cache (fifo_sz + lru_sz);
+			Ideal_cache id_cache (cache_sz);
 			
 			std::unordered_map<int, std::list <int>> Ideal_map = predict_pages(buf, npages);		//map with page positions for ideal_cache
 
@@ -90,10 +91,10 @@ class Q2cacheTest: public ::testing::Test {
 
 			cache.file_dump("cache_dump.txt");
 			FILE* cache_dump = fopen("cache_dump.txt", "r");
-			int fifo_sz_get = 0;
-			int lru_sz_get = 0;
+			size_t fifo_sz_get = 0;
+			size_t lru_sz_get = 0;
 
-			int scanf_res = fscanf(cache_dump, "%d %d ", &fifo_sz_get, &lru_sz_get);
+			int scanf_res = fscanf(cache_dump, "%ld %ld ", &fifo_sz_get, &lru_sz_get);
 
 			fifo_bf = (char*)calloc(fifo_sz*2*sizeof(int), sizeof(char));
 			save_fifo_bf = fifo_bf;

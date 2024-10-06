@@ -1,5 +1,4 @@
-#ifndef _IDEAL_CACHE_
-#define _IDEAL_CACHE_
+#pragma once
 
 #include <iostream>
 #include <unordered_map>
@@ -63,4 +62,3 @@ class Ideal_cache {
 
 };
 
-#endif 

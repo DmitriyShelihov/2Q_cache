@@ -1,4 +1,4 @@
-# Install script for directory: /home/dmitriy/Рабочий стол/Владос/2Q-cache/build/_deps/googletest-src
+# Install script for directory: /home/dmitriy/Рабочий стол/Владос/2Q_cache/build/_deps/googletest-src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/dmitriy/Рабочий стол/Владос/2Q-cache/build/_deps/googletest-build/googlemock/cmake_install.cmake")
+  include("/home/dmitriy/Рабочий стол/Владос/2Q_cache/build/_deps/googletest-build/googlemock/cmake_install.cmake")
 
 endif()
 

@@ -2,11 +2,10 @@
 #include <iostream>
 
 int main() {
-	size_t fifo_sz = 0;
-	size_t lru_sz = 0;
+	size_t cache_sz = 0;
 	size_t npages = 0;
-	std::cin >> fifo_sz >> lru_sz >> npages;
-	Q2_cache cache (fifo_sz, lru_sz);
+	std::cin >> cache_sz >> npages;
+	Q2_cache cache (cache_sz);
 
 	int ticks = 0;
 	int page = 0;

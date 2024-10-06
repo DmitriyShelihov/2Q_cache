@@ -56,11 +56,11 @@ int main(int argc, char* argv[]) {			//argv[1] = Number of tests
 
 	for (int j = 0; j < ntests; j++) {
 		int npages = rand() % 100000;		//number of pages. Max = 99999
-		size_t fifo_sz = rand() % 100 + 1;	//fifo size. Max = 100 
+		size_t cache_sz = rand() % 100 + 1;	//cache size. Max = 100 
 
-		size_t lru_sz = rand() % 100 + 1;	//lru size. Max = 100
-
-		fprintf(tests_src, "%ld %ld %d", fifo_sz, lru_sz, npages);
+		fprintf(tests_src, "%ld %d", cache_sz, npages);
+		size_t fifo_sz = cache_sz/3;
+		size_t lru_sz = cache_sz-fifo_sz;
 		Q2_cache_test cache (fifo_sz, lru_sz);
 		int page = 0;							
 		for (int i = 0; i < npages; i++) {
