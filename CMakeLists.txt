@@ -30,6 +30,12 @@ add_executable(
   src/test_gen.cpp
 )
 
+add_executable(
+  IDEAL_CACHE
+  src/ideal_cache.cpp
+)
+
+target_include_directories(IDEAL_CACHE PUBLIC include/)
 target_include_directories(TESTS PUBLIC include/)
 target_include_directories(MAIN PUBLIC include/)
 

@@ -64,7 +64,7 @@ class Q2cacheTest: public ::testing::Test {
 			size_t fifo_sz = cache_sz/3;
 			size_t lru_sz = cache_sz - fifo_sz;
 			Q2_cache cache (cache_sz);
-			next_object(&buf, 3);
+			next_object(&buf, 2);
 
 			int page = 0;
 			int ticks = 0;
