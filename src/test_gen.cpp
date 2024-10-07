@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {			//argv[1] = Number of tests
 		size_t cache_sz = rand() % 100 + 1;	//cache size. Max = 100 
 
 		fprintf(tests_src, "%ld %d", cache_sz, npages);
-		size_t fifo_sz = cache_sz/3;
+		size_t fifo_sz = cache_sz/2;
 		size_t lru_sz = cache_sz-fifo_sz;
 		Q2_cache_test cache (fifo_sz, lru_sz);
 		int page = 0;							

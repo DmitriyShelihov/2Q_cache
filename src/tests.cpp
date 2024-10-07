@@ -61,7 +61,7 @@ class Q2cacheTest: public ::testing::Test {
 			char* save_buf = buf;
 			buf = fgets(buf, SIZE_OF_INPUT_DATA, tests_src);
 			int sscanf_res = sscanf(buf, "%ld %d", &cache_sz, &npages);
-			size_t fifo_sz = cache_sz/3;
+			size_t fifo_sz = cache_sz/2;
 			size_t lru_sz = cache_sz - fifo_sz;
 			Q2_cache cache (cache_sz);
 			next_object(&buf, 2);

@@ -211,6 +211,19 @@ TEST_GEN/fast:
 .PHONY : TEST_GEN/fast
 
 #=============================================================================
+# Target rules for targets named IDEAL_CACHE
+
+# Build rule for target.
+IDEAL_CACHE: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 IDEAL_CACHE
+.PHONY : IDEAL_CACHE
+
+# fast build rule for target.
+IDEAL_CACHE/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IDEAL_CACHE.dir/build.make CMakeFiles/IDEAL_CACHE.dir/build
+.PHONY : IDEAL_CACHE/fast
+
+#=============================================================================
 # Target rules for targets named gmock
 
 # Build rule for target.
@@ -261,6 +274,30 @@ gtest_main: cmake_check_build_system
 gtest_main/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/build.make _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
+
+src/ideal_cache.o: src/ideal_cache.cpp.o
+.PHONY : src/ideal_cache.o
+
+# target to build an object file
+src/ideal_cache.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IDEAL_CACHE.dir/build.make CMakeFiles/IDEAL_CACHE.dir/src/ideal_cache.cpp.o
+.PHONY : src/ideal_cache.cpp.o
+
+src/ideal_cache.i: src/ideal_cache.cpp.i
+.PHONY : src/ideal_cache.i
+
+# target to preprocess a source file
+src/ideal_cache.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IDEAL_CACHE.dir/build.make CMakeFiles/IDEAL_CACHE.dir/src/ideal_cache.cpp.i
+.PHONY : src/ideal_cache.cpp.i
+
+src/ideal_cache.s: src/ideal_cache.cpp.s
+.PHONY : src/ideal_cache.s
+
+# target to generate assembly for a file
+src/ideal_cache.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IDEAL_CACHE.dir/build.make CMakeFiles/IDEAL_CACHE.dir/src/ideal_cache.cpp.s
+.PHONY : src/ideal_cache.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -347,6 +384,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... IDEAL_CACHE"
 	@echo "... MAIN"
 	@echo "... TESTS"
 	@echo "... TEST_GEN"
@@ -354,6 +392,9 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/ideal_cache.o"
+	@echo "... src/ideal_cache.i"
+	@echo "... src/ideal_cache.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

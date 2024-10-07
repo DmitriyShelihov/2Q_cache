@@ -23,7 +23,7 @@ class Q2_cache {
     
 	public:
 		Q2_cache (size_t cache_sz) {
-			size_t fifo_sz = cache_sz/3;
+			size_t fifo_sz = cache_sz/2;
 			size_t lru_sz = cache_sz-fifo_sz;
 			fifo_size = fifo_sz;
 			lru_size = lru_sz;
