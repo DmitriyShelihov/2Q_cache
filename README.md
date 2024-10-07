@@ -17,9 +17,9 @@
 ```
     ./MAIN
 ```
-Then: 
-1) input to integers: fifo size and lru size
-
+Then :
+1) input one integer: size of cache
+   
 2) input one integer: number of requests 
 
 3) input requests 
@@ -33,4 +33,8 @@ Then:
 * To run tests: 
 ```
     ./TESTS
+```
+* To run ideal_cache:
+```
+    ./IDEAL_CACHE
 ```
