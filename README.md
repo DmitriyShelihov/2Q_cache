@@ -34,7 +34,7 @@ Then :
 ```
     ./TESTS
 ```
-* To run idel_cache:
+* To run ideal_cache:
 ```
     ./IDEAL_CACHE
 ```
