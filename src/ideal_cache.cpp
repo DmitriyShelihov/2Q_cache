@@ -14,16 +14,17 @@ std::unordered_map <int, std::list <int>> predict_pages(const int buf[], int npa
          	}
       	} else {
  			(Ideal_map[page]).push_front(-1);
-      	}             
-      	return Ideal_map;
-	}
+      	}
+   	}
+  	return Ideal_map;
 }
 
 
 int main() {
     size_t cache_sz = 0;
     size_t npages = 0;
-    std::cin >> cache_sz >> npages;
+	
+	std::cin >> cache_sz >> npages;
 	
 	int buf[npages];
 
@@ -46,7 +47,6 @@ int main() {
  	}
 	
     std::cout << ticks << std::endl;
- 
     return 0;
 }
 

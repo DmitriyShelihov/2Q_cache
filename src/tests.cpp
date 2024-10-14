@@ -3,7 +3,7 @@
 #include "ideal_cache.h"
 
 
-#define SIZE_OF_INPUT_DATA 100000000	//[bytes] The max size in bytes of all input pages
+#define SIZE_OF_INPUT_DATA 1000000000	//[bytes] The max size in bytes of all input pages
 
 void next_object(char** buf, int times) {
 	for (int i = 0; i < times; i++) {
