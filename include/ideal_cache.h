@@ -33,40 +33,38 @@ class Ideal_cache {
 				}
 				return tick;
 			}
+			if (next_hit == -1)
+				return miss;
+			
 			if (id_list.size() < id_list_size) {
-				if (next_hit == -1) {
-					cur_max = -1;
-					latest_page = page_number;
-				}
 				if (cur_max != -1 && next_hit > cur_max) {
 					cur_max = next_hit;
 					latest_page = page_number;
 				}
 			}
-				//insert page
 			if (id_list.size() >= id_list_size) {
 				int cur_latest_page = page_number;
-				if (next_hit != -1)	{ 
-					if (next_hit >= cur_max  && cur_max != -1) {
-						return miss;
+			 
+				if (next_hit >= cur_max && cur_max != -1) {
+					return miss;
+				}
+				int max = next_hit;
+				id_list.erase((id_umap[latest_page]).iter);
+				id_umap.erase(latest_page);
+				for (std::list <int>::iterator i = id_list.begin(); i != id_list.end(); ++i) {
+					if ((id_umap[*i]).next_hit == -1) {
+						max = -1;
+						cur_latest_page = *i;
+						break;
 					}
-					int max = next_hit;
-					id_list.erase((id_umap[latest_page]).iter);
-					id_umap.erase(latest_page);
-					for (std::list <int>::iterator i = id_list.begin(); i != id_list.end(); ++i) {
-						if ((id_umap[*i]).next_hit == -1) {
-							max = -1;
-							cur_latest_page = *i;
-							break;
-						}
-						else if ((id_umap[*i]).next_hit > max) {
-							max = (id_umap[*i]).next_hit;
-							cur_latest_page = *i;
-						}
+					else if ((id_umap[*i]).next_hit > max) {
+						max = (id_umap[*i]).next_hit;
+						cur_latest_page = *i;
 					}
-					cur_max = max;
-					latest_page = cur_latest_page;
-				} 
+				}
+				cur_max = max;
+				latest_page = cur_latest_page;
+				 
 			}
 			id_list.push_front(page_number);
 			id_umap[page_number] = {id_list.begin(), next_hit};
