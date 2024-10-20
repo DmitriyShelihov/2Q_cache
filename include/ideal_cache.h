@@ -14,36 +14,45 @@ struct page_info {
 	int next_hit;
 };
 
+struct Node {
+	int page;
+	int next_hit;
+};
+
 class Ideal_cache {
 	private: 
 		std::list <int> id_list;
 		std::unordered_map <int, struct page_info> id_umap;
 		size_t id_list_size;
-		int cur_max = -1;
-		int latest_page;
+
 	public: 
 		Ideal_cache (size_t list_sz) 
 			: id_list_size(list_sz) {} 
 		Ideal_cache_input_res insert_page (int page_number, int next_hit) {
-			if (next_hit == -1) {
-				if (id_umap.find(page_number) != id_umap.end()) {
-					auto g = (id_umap[page_number]).iter;
-					id_list.erase(g);
-					id_umap.erase(page_number);
-					
-					int new_cur_max = -1;
-
-					for (auto i = id_umap.begin(), ie = id_umap.end(); i != ie; ++i) {
-						if ((i->second).next_hit > new_cur_max) {
-							new_cur_max = (i->second).next_hit;
-							latest_page = *((i->second).iter);
-						}
-					}
-					cur_max = new_cur_max;
-					return tick;
-				} 
+			if (next_hit == -1 && id_umap.find(page_number) == id_umap.end()) {
 				return miss;
 			}
+
+            if (next_hit > cur_max && id_list.size() >= id_list_size) {
+              	return miss;
+          	}
+
+			if (next_hit == -1) {					// => new_max
+				id_list.erase((id_umap[page_number]).iter);
+				id_umap.erase(page_number);
+					
+				int new_cur_max = -1;
+
+				for (auto i = id_umap.begin(), ie = id_umap.end(); i != ie; ++i) {
+					if ((i->second).next_hit > new_cur_max) {
+						new_cur_max = (i->second).next_hit;
+						latest_page = *((i->second).iter);
+					}
+				}
+				cur_max = new_cur_max;
+				return tick;
+			}
+			
 			if (id_umap.find(page_number) != id_umap.end()) {
 				if (next_hit > cur_max) {
 					cur_max = next_hit;
@@ -58,14 +67,11 @@ class Ideal_cache {
 					latest_page = page_number;
 				}
 				id_list.push_front(page_number);
-					 
-				struct page_info info {id_list.begin(), next_hit};
-				id_umap[page_number] = info;
+				id_umap[page_number] = {id_list.begin(), next_hit};
 				
 				return miss;
 			} 
-			if (next_hit > cur_max) 
-				return miss;
+			//=>new_max
 			id_list.erase((id_umap[latest_page]).iter);
 			id_umap.erase(latest_page);
 
