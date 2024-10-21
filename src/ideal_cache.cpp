@@ -1,5 +1,4 @@
 #include "ideal_cache.h"
-#include <fstream>
 
 std::unordered_map <int, std::list <int>> predict_pages(const int buf[], int npages) {
 	std::unordered_map <int, std::list <int>> Ideal_map;
@@ -19,14 +18,12 @@ int main() {
     size_t cache_sz = 0;
     size_t npages = 0;
 	
-	std::ifstream in("test.txt");
-	in >> cache_sz >> npages;
+	std::cin >> cache_sz >> npages;
 	
 	int buf[npages];
 
 	for (int i = 0; i < npages; i++)
-		in >> buf[i];
-	in.close();
+		std::cin >> buf[i];
 
 	std::unordered_map<int, std::list<int>> Ideal_map = predict_pages(buf, npages);
 	Ideal_cache cache (cache_sz);
@@ -35,8 +32,6 @@ int main() {
 	int ticks = 0;
 
 	for (int i = 0; i < npages; i++) {
-		if (i%1000 == 0)
-			printf("page %d\n", i);
 		page = buf[i];   
  		if ((Ideal_map[page]).size() > 0)
  			(Ideal_map[page]).pop_back();
