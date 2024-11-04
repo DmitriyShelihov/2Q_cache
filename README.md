@@ -27,7 +27,7 @@ This optimizes the lru cache algorithm, since in the 2Q cache, rarely hitting re
    ```
    7
    ```
-## How to run tests and benchmark:\
+## How to run tests and benchmark:
 1. Create directory Tests
 2. Generate tests (Default 10 tests):
    `./TEST_GEN 10`
