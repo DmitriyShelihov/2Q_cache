@@ -8,7 +8,7 @@ Built on the basis of lru cache, with the difference that two queues are used:
 
 This optimizes the lru cache algorithm, since in the 2Q cache, rarely hitting requests do not crowd out frequently hitting ones, which allows you to increase the number of cache hits
 
-## To build and run
+## How to build and run
 1. Copy files from the repository to your folder using:\
    `git clone git@github.com:DmitriyShelihov/2Q_cache.git`
 2. In the build folder, build the project using:
@@ -27,3 +27,11 @@ This optimizes the lru cache algorithm, since in the 2Q cache, rarely hitting re
    ```
    7
    ```
+## How to run tests and benchmark:\
+1. Create directory Tests
+2. Generate tests (Default 10 tests):
+   `./TEST_GEN 10`
+3. Run testing and benchmark:
+   `./TESTS`
+## Support
+**This project is created by [Dmitriy Shelihov](https://t.me/SHELL_DS)**
