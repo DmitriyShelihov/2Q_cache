@@ -51,7 +51,7 @@ class Q2_cache_test {
 };
 
 int main(int argc, char* argv[]) {			//argv[1] = Number of tests
-	FILE* tests_src = fopen("tests.txt", "w");
+	FILE* tests_src = fopen("Tests/tests.txt", "w");
 	int ntests = atoi(argv[1]);
 
 	for (int j = 0; j < ntests; j++) {

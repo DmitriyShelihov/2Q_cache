@@ -14,7 +14,7 @@ void next_object(char** buf, int times) {
 	}
 }
 
-FILE* tests_src = fopen("tests.txt", "r");
+FILE* tests_src = fopen("Tests/tests.txt", "r");
 
 class Q2cacheTest: public ::testing::Test {
 	public: 
