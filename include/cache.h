@@ -31,6 +31,9 @@ public:
 };
 
 template <typename T, typename KeyT>
+int Cache<T, KeyT>::hits_ = 0;
+
+template <typename T, typename KeyT>
 const T& Cache<T, KeyT>::get(const KeyT& key) const {
 	return this->page_umap_[key];
 }
@@ -39,7 +42,7 @@ template <typename T, typename KeyT>
 void Cache<T, KeyT>::fifo_hit(const KeyT& key) {
 	this->fifo_.erase(this->fumap_[key]);
 
-	if (this->lru_.size() == this->size_) {
+	if (this->lru_.size() == this->size_/2) {
 		this->page_umap_.erase(this->lru_.back());
 		this->lumap_.erase(this->lru_.back());
 		this->lru_.pop_back();
@@ -60,7 +63,7 @@ void Cache<T, KeyT>::lru_hit(const KeyT& key) {
 
 template <typename T, typename KeyT>
 void Cache<T, KeyT>::cache_miss(const KeyT& key) {
-	if (this->fifo_.size() < this->size_) {
+	if (this->fifo_.size() < (this->size_-this->size_/2)) {
 		this->fifo_.push_front(key);
 		this->fumap_[key] = this->fifo_.begin();
 		return;

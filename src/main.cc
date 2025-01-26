@@ -1,30 +1,44 @@
-#include "Cache.h"
 #include <iostream>
+#include <vector>
+#include <fstream>
 
-static int slow_get_page(int key) {
+int slow_get_page(const int& key) {
 	return key;
 }
 
-template <typename T, typename KeyT>
-static struct Input {
-	int n_;
+#include "Cache.h"
+
+template <typename KeyT>
+struct Input {
+	int sz_ = 0;
+	int n_ = 0;
 	std::vector<KeyT> data_;
-	Input(ifstream& in = std::cin&);
+	Input(std::istream& in = std::cin);
 };
 
-template <typename T, typename KeyT>
-Input<T, KeyT>::Input(ifstream& in) {
-	int n; in >> n;
+template <typename KeyT>
+Input<KeyT>::Input(std::istream& in) {
+	long long sz; in >> sz; 
+	if (sz == 0) //Normal?
+	this->sz_ = sz;
+	int n; in >> n; this->n_ = n;
 	if (n < 0) {
-		return 1;
-	} 
-	data`
-	for (int i = 0; i < n; ++i) {
-		KeyT key;
-		in >> data[];
+		//Error
+	}
+	else {
+		std::vector<KeyT> data(n);
+		for (int i = 0; i < n; ++i) {
+			in >> data[i];
+		}
+		this->data_ = std::move(data);
 	}
 }
 
 int main() {
-	
+	Input<int> data(std::cin);
+	Cache<int, int> cache(slow_get_page, data.sz_);
+	for (int i = 0; i < data.n_; ++i) {
+		cache.insert(data.data_[i]);
+	}
+	std::cout << Cache<int, int>::hits_ << std::endl;
 }
