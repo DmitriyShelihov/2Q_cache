@@ -15,19 +15,25 @@ class Cache {
 	std::list<KeyT> lru_;
 	std::unordered_map<KeyT, KeyTor> lumap_;
 	
-	std::unordered_map<KeyT, T> page_umap;
+	std::unordered_map<KeyT, T> page_umap_;
 	T (*slow_get_page_)(const KeyT& key);
 
-	void lru_hit(const KeyT& key);
-	void fifo_hit(const KeyT& key);
-	void cache_miss(const KeyT& key);
+	inline void lru_hit(const KeyT& key);
+	inline void fifo_hit(const KeyT& key);
+	inline void cache_miss(const KeyT& key);
 public:
 	explicit Cache(T (*slow_get_page)(const KeyT& key), size_t size = 0) 
 		: slow_get_page_(slow_get_page), size_(size) {}
-	void insert(const KeyT& key);
+	inline void insert(const KeyT& key);
 	
 	static int hits_;
+	inline const T& get(const KeyT& key) const;
 };
+
+template <typename T, typename KeyT>
+const T& Cache<T, KeyT>::get(const KeyT& key) const {
+	return this->page_umap_[key];
+}
 
 template <typename T, typename KeyT>
 void Cache<T, KeyT>::fifo_hit(const KeyT& key) {
@@ -65,8 +71,6 @@ void Cache<T, KeyT>::cache_miss(const KeyT& key) {
 	this->page_umap_.erase(last);
 	this->fifo_.push_front(key);
 	this->fumap_[key] = this->fifo_.begin();
-	return;
-	
 }
 
 template <typename T, typename KeyT>
