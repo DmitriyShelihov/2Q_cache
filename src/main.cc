@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include "../include/cache.h"
 
-int slow_get_page(const int& key) {
-	return key;
+template <typename T, typename KeyT>
+T slow_get_page(const int& keyT) {
+	return keyT;
 }
-
-#include "Cache.h"
 
 template <typename KeyT>
 struct Input {
@@ -19,7 +19,7 @@ struct Input {
 template <typename KeyT>
 Input<KeyT>::Input(std::istream& in) {
 	long long sz; in >> sz; 
-	if (sz == 0) //Normal?
+	if (sz == 0) {}
 	this->sz_ = sz;
 	int n; in >> n; this->n_ = n;
 	if (n < 0) {
@@ -36,7 +36,7 @@ Input<KeyT>::Input(std::istream& in) {
 
 int main() {
 	Input<int> data(std::cin);
-	Cache<int, int> cache(slow_get_page, data.sz_);
+	Cache<int, int> cache(slow_get_page<int, int>, data.sz_);
 	for (int i = 0; i < data.n_; ++i) {
 		cache.insert(data.data_[i]);
 	}
