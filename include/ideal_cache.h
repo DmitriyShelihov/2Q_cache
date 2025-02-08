@@ -1,4 +1,5 @@
 #pragma once 
+
 #include <unordered_map>
 #include <set>
 #include <list>
@@ -7,7 +8,6 @@
 
 template <typename KeyT, typename Compare = std::less<KeyT>>
 class IdealCache {
-public:
 	using PairT = std::pair<KeyT, size_t>;
 	using ListT = std::list<size_t>;
 
@@ -26,7 +26,7 @@ private:
 		bool operator() (const PairT& a, const PairT& b) const{
 			return cmp_(a.second, b.second);
 		}
-		cmp_for_set(Compare cmp) : cmp_(cmp) {};
+		explicit cmp_for_set(Compare cmp) : cmp_(cmp) {};
 	};
 
 private:
@@ -48,23 +48,12 @@ void IdealCache<KeyT, Compare>::map_keys(const std::vector<KeyT>& keys) {
 
 template <typename KeyT, typename Compare>
 bool IdealCache<KeyT, Compare>::insert_page(const KeyT& key, size_t next_hit) {
-	std::cout << "dump before insert\n";
-	std::cout << "cache_size: " << this->size_ << std::endl;
-	for (auto i : this->umap_) {
-		std::cout << i.first << std::endl;
-	}
-	std::cout << "set_: \n";
-	for (auto i : this->set_) {
-		std::cout << i.first << " "  <<i.second << "\n";
-	}
-	std::cout << "set.size() = " << this->set_.size() << std::endl;
-	std::cout << "dump ended\n";
 	auto& umap_ = this->umap_; 
 	auto& set_ = this->set_;
 
 	if (umap_.find(key) != umap_.end()) {
 		for (auto i = set_.begin(), ie = set_.end(); i != ie; ++i) {
-			if (cmp_(i->first, key) == true) {
+			if (!cmp_(i->first, key) && !cmp_(key, i->first)) {
 				set_.erase(i);
 				break;
 			}
@@ -81,41 +70,35 @@ bool IdealCache<KeyT, Compare>::insert_page(const KeyT& key, size_t next_hit) {
 		return false;
 	}
 	if (set_.size() < this->size_) {
-		std::cout << "Cache is not full\n";
-		std::cout << set_.size();
 		set_.insert({key, next_hit});
-		std::cout << set_.size();
-		std::cout << "check ended\n";
 		umap_[key] = next_hit;
-		
 		return false;
 	}
-	if (next_hit > set_.rbegin()->first)
+	if (next_hit > set_.rbegin()->second)
 		return false;
 	
-	umap_.erase((*(set_.rbegin())).first);
+	umap_.erase(set_.rbegin()->first);
 			
 	auto max_iter = set_.rbegin();
 
 	for (auto i = set_.begin(), ie = set_.end(); i != ie; ++i) {
-		if (cmp_(i->first, max_iter->first) == true) {
+		if (!cmp_(i->first, max_iter->first) && !cmp_(max_iter->first, i->first)) {
 			set_.erase(i);
 			break;
 		}
 	}
 	set_.insert({key, next_hit});
 	umap_[key] = next_hit;
-
 	return false;
 }
 
 template <typename KeyT, typename Compare>
 size_t IdealCache<KeyT, Compare>::get_ans() {
-	for (size_t i = 0; i < this->keys_.size(); ++i) {
-		if (this->data_[this->keys_[i]].size() > 0) {
-			this->data_[this->keys_[i]].pop_back();
+	for (size_t i = 0; i < keys_.size(); ++i) {
+		if (data_[keys_[i]].size() > 0) {
+			data_[keys_[i]].pop_back();
 		}
-		ans_ += this->insert_page(this->keys_[i], this->data_[this->keys_[i]].back());
+		ans_ += insert_page(keys_[i], data_[keys_[i]].back());
 	}
 	return ans_;
 }
