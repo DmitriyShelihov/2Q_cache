@@ -1,8 +1,10 @@
 #pragma once
-
 #include <list>
 #include <unordered_map>
 #include <cstddef>
+
+template <typename T, typename KeyT>
+T slow_get_page(const KeyT& key);
 
 template <typename T, typename KeyT>
 class Cache {
